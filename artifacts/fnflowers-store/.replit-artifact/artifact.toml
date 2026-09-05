@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "FNFlowers Flower Store"
+description = "An English-language test storefront for FNFlowers, a fictional US flower company offering curated bouquets, same-day delivery, cart management, and a polished checkout experience."
+version = "1.0.0"
+id = "artifacts/fnflowers-store"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26262
+
+[services.development]
+run = "pnpm --filter @workspace/fnflowers-store run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fnflowers-store", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/fnflowers-store/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26262"
+BASE_PATH = "/"

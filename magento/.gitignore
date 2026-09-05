@@ -1,0 +1,4 @@
+.env
+auth.json
+src/*
+!src/.gitkeep
